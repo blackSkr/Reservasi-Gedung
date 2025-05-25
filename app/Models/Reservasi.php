@@ -12,6 +12,7 @@ class Reservasi extends Model
     protected $casts = [
         'waktu_mulai' => 'datetime',
         'waktu_selesai' => 'datetime',
+        'waktu_reservasi' => 'datetime',
     ];
     protected $fillable = [
 

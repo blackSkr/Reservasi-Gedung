@@ -3,7 +3,9 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Register;
+use App\Filament\Widgets\NotifReservasi;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -52,20 +54,21 @@ class AdminPanelProvider extends PanelProvider
             ->navigationGroups([
                 NavigationGroup::make()
                 ->label('Gedung')
-                ->icon('heroicon-m-building-office-2'),
+                ->icon('heroicon-o-building-office-2'),
                 NavigationGroup::make()
                 ->label('Reservasi')
-                ->icon('heroicon-m-rectangle-stack'),
+                ->icon('heroicon-o-rectangle-stack'),
                 NavigationGroup::make()
                 ->label('Perusahaan')
-                ->icon('heroicon-m-building-library'),
+                ->icon('heroicon-o-chart-bar'),
                 NavigationGroup::make()
                 ->label('Pengaturan')
-                ->icon('heroicon-m-cog-6-tooth'),
+                ->icon('heroicon-o-cog-8-tooth'),
 
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
+                // \App\Filament\Widgets\NotifReservasi::class,
                 // Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
             ])
@@ -86,5 +89,14 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+    public function boot(): void
+    {
+        Filament::serving(function () {
+            Filament::registerRenderHook(
+                'panels::global-search.after',
+                fn (): string => view('components.notification-bell')->render(),
+            );
+        });
     }
 }

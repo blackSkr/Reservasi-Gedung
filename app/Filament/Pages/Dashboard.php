@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Filament\Resources\ReservasiResource;
 use App\Filament\Widgets\CekKetersediaanGedung;
+use App\Filament\Widgets\NotifReservasi;
 // use App\Filament\Widgets\OrdersChart;
 // use App\Filament\Widgets\UsersChart;
 use App\Models\Gedung;
@@ -20,13 +21,10 @@ use Filament\Pages\Dashboard as BaseDashboard;
 class Dashboard extends BaseDashboard
 {
     use BaseDashboard\Concerns\HasFiltersForm;
-        // public function getHeading(): string
-        // {
-        //     return 'Cek Gedung Yang Ready';
-        // }
+
     public function filtersForm(Form $form): Form
     {
-        
+    //  dd($form);   
         return $form
             ->schema([
                 Section::make()
@@ -42,9 +40,4 @@ class Dashboard extends BaseDashboard
                     ->columns(2),
             ]);
     }
-    // public function getHeaderWidgets(): array{
-    //     return [
-    //         CekKetersediaanGedung::class,
-    //     ];
-    // }
 }

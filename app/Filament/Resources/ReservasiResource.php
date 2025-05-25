@@ -44,6 +44,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Filament\Tables\Columns\IconColumn;
+use App\Filament\Resources\ReservasiResource\Pages\ViewReservasi; // <-- Tambah ini
 
 use function Laravel\Prompts\text;
 
@@ -341,6 +342,8 @@ class ReservasiResource extends Resource
         return [
             'index' => Pages\ListReservasi::route('/'),
             'create' => Pages\CreateReservasi::route('/create'),
+            'view' => Pages\ViewReservasi::route('/{record}'),
+
             // 'edit' => Pages\EditReservasi::route('/{record}/edit'),
         ];
     }
