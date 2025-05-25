@@ -84,15 +84,16 @@ class ReservasiResource extends Resource
 
         return $form
         ->schema([
-            Forms\Components\Placeholder::make('user_nama')
-                ->label('User')
-                ->content(fn ($record) => $record?->user?->nama ?? '-'),
+            // Forms\Components\Placeholder::make('user_nama')
+            //     ->label('User')
+            //     ->content(fn ($record) => $record?->user?->nama ?? '-'),
             Forms\Components\Hidden::make('user_id')
             ->label('Nama User')
                 ->default(fn () => Auth::user()->nama)
                 ->dehydrated(true)
                 ->disabled(),
             Forms\Components\Select::make('gedung_id')
+                ->columnSpanFull()
                 ->label('Pilih Gedung')
                 ->relationship(
                     name: 'gedung',
@@ -117,16 +118,14 @@ class ReservasiResource extends Resource
                         $set('total_reservasi', $totalLama - $nominalLama + $hargaBaru);
                     }
                 }),            
-        
-    
             TextInput::make('nominal')
                 ->label('Harga')
                 ->disabled()
                 ->dehydrated()
-                ->prefix('Rp'), 
-                
+                ->prefix('Rp')
+                ->columnSpanFull(),
             
-            DateTimePicker::make('waktu_reservasi')
+            Hidden::make('waktu_reservasi')
                 ->label('Tanggal Reservasi')
                 ->default(now())
                 ->disabled()
@@ -195,7 +194,9 @@ class ReservasiResource extends Resource
                 ->numeric()
                 ->required()
                 ->disabled()
-                ->dehydrated(),
+                ->dehydrated()
+                ->columnSpanFull(),
+ 
             FileUpload::make('bukti_pembayaran')
                 // ->disk('local')
                 ->columnSpanFull()

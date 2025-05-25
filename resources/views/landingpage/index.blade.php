@@ -55,7 +55,7 @@
                     <a href="#testimonials" class="relative text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary-500 after:transition-all after:duration-300 hover:after:w-full">Testimoni</a>
                     <a href="#contact" class="relative text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary-500 after:transition-all after:duration-300 hover:after:w-full">Kontak</a>
                     {{-- <a href="/login" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-300">Login</a> --}}
-                    <a href="{{ route('filament.admin.auth.login') }}" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-300">Login</a>
+                    {{-- <a href="{{ route('filament.admin.auth.login') }}" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-300">Login</a> --}}
                 </div>
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900 focus:outline-none">
