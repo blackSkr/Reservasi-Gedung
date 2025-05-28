@@ -44,9 +44,16 @@
         .invoice-title {
             text-align: center;
             font-size: 24px;
-            margin: 30px 0;
+            margin: 30px 0 10px;
             color: #222;
             font-weight: bold;
+        }
+
+        .invoice-desc {
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 30px;
         }
 
         .details-section {
@@ -127,6 +134,13 @@
             color: #004080;
         }
 
+        .note {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+        }
+
         footer {
             margin-top: 40px;
             text-align: center;
@@ -136,6 +150,11 @@
     </style>
 </head>
 <body>
+    @php
+        $statusPembayaran = strtolower($reservasiList->first()->status ?? '');
+    @endphp
+
+    @if($statusPembayaran === 'sudah membayar')
     <div class="invoice-box">
         <div class="header">
             <div class="company-info">
@@ -148,8 +167,9 @@
             </div>
         </div>
 
-        <div class="invoice-title">
-            INVOICE RESERVASI
+        <div class="invoice-title">INVOICE RESERVASI</div>
+        <div class="invoice-desc">
+            Dokumen ini merupakan bukti tagihan atas transaksi reservasi fasilitas. Mohon lakukan pembayaran sesuai dengan jumlah yang tertera di bawah ini.
         </div>
 
         <div class="details-section">
@@ -185,11 +205,11 @@
         <table class="items-table">
             <thead>
                 <tr>
-                    <th style="width: 20%;">Nama Pemesan</th>
-                    <th style="width: 20%;">Fasilitas</th>
-                    <th style="width: 20%;">Check In</th>
-                    <th style="width: 20%;">Check Out</th>
-                    <th style="width: 20%;">Harga</th>
+                    <th>Nama Pemesan</th>
+                    <th>Fasilitas</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Harga</th>
                 </tr>
             </thead>
             <tbody>
@@ -211,9 +231,22 @@
             Grand Total: Rp {{ number_format($grandTotal, 0, ',', '.') }}
         </div>
 
+        <div class="note">
+            <strong>Catatan:</strong><br>
+            Invoice ini hanya dapat digunakan sebagai bukti pembayaran yang sah setelah transaksi diselesaikan.<br>
+            Terima kasih telah menggunakan layanan PT. PamsReserv.
+        </div>
+
         <footer>
             &copy; {{ date('Y') }} PT. PamsReserv. All rights reserved.
         </footer>
     </div>
+    @else
+    <div class="invoice-box" style="text-align: center; padding: 80px;">
+        <h2>Invoice Tidak Tersedia</h2>
+        <p>Maaf, invoice hanya dapat dicetak setelah pembayaran berhasil dilakukan.</p>
+        <p>Silakan selesaikan pembayaran terlebih dahulu untuk mendapatkan invoice resmi.</p>
+    </div>
+    @endif
 </body>
 </html>
